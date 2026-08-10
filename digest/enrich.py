@@ -40,7 +40,7 @@ async def enrich(stories: list[Story], user_agent: str, max_words: int = 3000) -
                 resp = await client.get(url, timeout=FETCH_TIMEOUT)
                 resp.raise_for_status()
             except Exception as exc:
-                log.info("enrich skip url=%s error=%s", url, exc)
+                log.info("enrich skip url=%s error=%s: %s", url, type(exc).__name__, exc)
                 return
         story.text = extract_text(resp.text, max_words)
 

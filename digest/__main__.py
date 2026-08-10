@@ -57,6 +57,8 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(
         level=logging.INFO, format="%(levelname)s %(name)s %(message)s", stream=sys.stdout
     )
+    # Keep the run log readable: one line per stage, not one per HTTP request.
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     args = parse_args(argv)
     settings = load_settings()
     run_date = datetime.now(UTC).date().isoformat()

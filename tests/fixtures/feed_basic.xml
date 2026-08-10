@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Example Chip News</title>
+    <link>https://example.com</link>
+    <item>
+      <title>TSMC announces 1.4nm process roadmap</title>
+      <link>https://Example.com/tsmc-14a/?utm_source=rss&amp;utm_medium=feed</link>
+      <pubDate>Sun, 09 Aug 2026 08:00:00 GMT</pubDate>
+      <description>TSMC laid out its A14 roadmap at its technology symposium.</description>
+    </item>
+    <item>
+      <title>Old story outside the window</title>
+      <link>https://example.com/old-story</link>
+      <pubDate>Sat, 01 Aug 2026 08:00:00 GMT</pubDate>
+      <description>This is too old to include.</description>
+    </item>
+    <item>
+      <title>Undated analog PLL deep dive</title>
+      <link>https://example.com/pll-deep-dive</link>
+      <description>No pubDate on this one; it should still be included.</description>
+    </item>
+    <item>
+      <title>Entry with no link is skipped</title>
+      <description>Malformed item.</description>
+    </item>
+  </channel>
+</rss>

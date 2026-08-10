@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>E2E Chip Feed</title>
+    <link>https://feeds.test</link>
+    <item>
+      <title>TSMC announces 1.4nm process roadmap</title>
+      <link>https://articles.test/tsmc-14a?utm_source=rss</link>
+      <description>TSMC laid out its A14 roadmap at its technology symposium.</description>
+    </item>
+    <item>
+      <title>Nvidia unveils B300 AI accelerator at GTC</title>
+      <link>https://articles.test/nvidia-b300</link>
+      <description>New accelerator with more HBM for datacenter training.</description>
+    </item>
+    <item>
+      <title>Cadence adds RL-based placement to Innovus</title>
+      <link>https://articles.test/cadence-rl</link>
+      <description>Reinforcement learning placement lands in a production EDA flow.</description>
+    </item>
+    <item>
+      <title>Texas Instruments beats Q2 estimates on analog demand</title>
+      <link>https://articles.test/ti-q2</link>
+      <description>Analog strength drives an earnings beat.</description>
+    </item>
+    <item>
+      <title>Imec shows 2D-material transistor progress</title>
+      <link>https://articles.test/imec-2d</link>
+      <description>Research progress on beyond-silicon channels.</description>
+    </item>
+    <item>
+      <title>Skyworks launches new RF front end for satellite phones</title>
+      <link>https://articles.test/skyworks-rf</link>
+      <description>New RF module targets direct-to-satellite handsets.</description>
+    </item>
+    <item>
+      <title>Startup raises Series B for analog layout automation</title>
+      <link>https://articles.test/analog-startup</link>
+      <description>ML-driven analog layout tools attract new funding.</description>
+    </item>
+  </channel>
+</rss>

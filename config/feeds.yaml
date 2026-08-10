@@ -1,0 +1,50 @@
+# Feed list. Each entry: url (required), name (required), weight (optional, default 1.0).
+# Weight biases both dedupe (which outlet represents a story cluster) and ranking.
+# A broken feed never fails the run; it is logged and skipped. Prune freely.
+
+feeds:
+  - name: Semiconductor Engineering
+    url: https://semiengineering.com/feed/
+    weight: 1.5
+  - name: SemiAnalysis
+    url: https://semianalysis.com/feed/
+    weight: 1.5
+  - name: EE Times
+    url: https://www.eetimes.com/feed/
+    weight: 1.3
+  - name: IEEE Spectrum (Semiconductors)
+    url: https://spectrum.ieee.org/feeds/topic/semiconductors.rss
+    weight: 1.3
+  - name: Chips and Cheese
+    url: https://chipsandcheese.com/feed/
+    weight: 1.2
+  - name: The Next Platform
+    url: https://www.nextplatform.com/feed/
+    weight: 1.2
+  - name: More Than Moore
+    url: https://morethanmoore.substack.com/feed
+    weight: 1.2
+  - name: Fabricated Knowledge
+    url: https://www.fabricatedknowledge.com/feed
+    weight: 1.1
+  - name: WikiChip Fuse
+    url: https://fuse.wikichip.org/feed/
+    weight: 1.0
+  - name: ServeTheHome
+    url: https://www.servethehome.com/feed/
+    weight: 1.0
+  - name: Hacker News (semiconductor, 50+ points)
+    url: https://hnrss.org/newest?q=semiconductor&points=50
+    weight: 1.0
+  - name: Hacker News (chip design, 50+ points)
+    url: https://hnrss.org/newest?q=%22chip+design%22&points=50
+    weight: 1.0
+  - name: arXiv cs.AR (Hardware Architecture)
+    url: https://rss.arxiv.org/rss/cs.AR
+    weight: 0.9
+  - name: Tom's Hardware
+    url: https://www.tomshardware.com/feeds/all
+    weight: 0.8
+  - name: The Register
+    url: https://www.theregister.com/headlines.atom
+    weight: 0.7

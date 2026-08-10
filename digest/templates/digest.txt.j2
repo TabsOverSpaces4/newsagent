@@ -1,0 +1,23 @@
+CHIP DIGEST {{ run_date }}
+
+{{ digest.lede }}
+
+{% for section in digest.sections %}
+{{ section.title | upper }}
+{{ "-" * (section.title | length) }}
+
+{% for story in section.stories %}
+* {{ story.headline }}
+{{ story.summary }}
+Why it matters: {{ story.why_it_matters }}
+Read at {{ story.source }}: {{ story.url }}
+{% for rel in story.related_urls %}
+Related: {{ rel }}
+{% endfor %}
+
+{% endfor %}
+{% endfor %}
+--
+You are receiving Chip Digest, a daily semiconductor news summary sent to a
+small private list. To unsubscribe, reply to this email with the word
+"unsubscribe" and you will be removed.

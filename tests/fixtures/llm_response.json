@@ -1,0 +1,44 @@
+{
+  "lede": "TSMC's A14 roadmap reveal is the day's defining story, locking in a 2028 production target that keeps the foundry a node ahead of Samsung and Intel. Meanwhile, machine learning placement tools continue their march into mainstream EDA flows.",
+  "sections": [
+    {
+      "title": "Foundry and Process",
+      "stories": [
+        {
+          "headline": "TSMC commits A14 node to 2028 production",
+          "summary": "At its technology symposium, TSMC laid out the A14 process roadmap with production slated for 2028, claiming a 15 percent speed gain over N2 at equal power. The node pairs second-generation nanosheet transistors with a new standard cell architecture aimed at AI accelerators. CoWoS packaging capacity is also set to double next year.",
+          "why_it_matters": "The announced schedule keeps TSMC roughly a full node ahead of Samsung and Intel Foundry, which shapes where every major AI chip lands through the decade.",
+          "url": "https://example.com/tsmc-14a",
+          "source": "Example Chip News",
+          "related_urls": ["https://example.com/tsmc-14a-analysis"]
+        }
+      ]
+    },
+    {
+      "title": "AI Hardware",
+      "stories": [
+        {
+          "headline": "Nvidia's B300 accelerator targets datacenter refresh cycles",
+          "summary": "Nvidia introduced the B300 accelerator at GTC with higher HBM capacity and a revised NVLink topology. Early cloud partners are already listing instances for the first half of next year.",
+          "why_it_matters": "Each accelerator generation resets the economics of training clusters, and B300 supply will determine who can scale next year.",
+          "url": "https://example.com/nvidia-b300",
+          "source": "EE Times",
+          "related_urls": []
+        }
+      ]
+    },
+    {
+      "title": "AI in Chip Design",
+      "stories": [
+        {
+          "headline": "Cadence ships reinforcement learning placement in Innovus",
+          "summary": "Cadence added a reinforcement learning placement engine to Innovus, reporting single-digit PPA gains on customer testcases. The feature moves ML placement from research demos into a mainstream production flow.",
+          "why_it_matters": "Production EDA adoption is the real signal that AI-assisted physical design has crossed from papers into tapeouts.",
+          "url": "https://example.com/cadence-rl-placement",
+          "source": "SemiEngineering",
+          "related_urls": []
+        }
+      ]
+    }
+  ]
+}

@@ -42,6 +42,24 @@ feeds:
   - name: arXiv cs.AR (Hardware Architecture)
     url: https://rss.arxiv.org/rss/cs.AR
     weight: 0.9
+  - name: arXiv eess.SP (Signal Processing)
+    url: https://rss.arxiv.org/rss/eess.SP
+    weight: 1.5
+  - name: arXiv eess.SY (Systems and Control)
+    url: https://rss.arxiv.org/rss/eess.SY
+    weight: 1.0
+  # Google Alerts RSS feeds for scholarly papers. To create these:
+  #   1. Go to https://www.google.com/alerts
+  #   2. Enter the query (e.g. "analog circuit design")
+  #   3. Click "Show options", set Sources to whatever you like
+  #   4. Set "Deliver to" → "RSS feed"
+  #   5. Click Create Alert, then copy the feed URL
+  #   6. Paste it below, replacing the placeholder URL
+  
+  - name: Google Scholar (analog IC design)
+    url: https://www.google.com/alerts/feeds/03615819541731509182/2872320646467738511
+    weight: 1.5
+
   - name: Tom's Hardware
     url: https://www.tomshardware.com/feeds/all
     weight: 0.8

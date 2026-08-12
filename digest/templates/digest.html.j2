@@ -1,53 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
 <title>Chip Digest {{ run_date }}</title>
+<!--[if mso]>
+<noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+<![endif]-->
+<style type="text/css">
+  body,table,td,a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+  table,td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  img { -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; }
+  a { color:#0B1F2A; }
+  @media only screen and (max-width:620px) {
+    .wrap { width:100% !important; }
+    .pad { padding-left:20px !important; padding-right:20px !important; }
+    .hd { font-size:19px !important; line-height:26px !important; }
+    .lead { font-size:16px !important; line-height:25px !important; }
+    .mast { font-size:22px !important; letter-spacing:2px !important; }
+    .stack { display:block !important; width:100% !important; text-align:left !important; padding-top:8px !important; }
+  }
+</style>
 </head>
-<body style="margin:0; padding:0; background-color:#f4f4f4;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4;">
-<tr><td align="center" style="padding:16px 8px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0"
-       style="max-width:600px; background-color:#ffffff; border-radius:6px;
-              font-family:Georgia, 'Times New Roman', serif; color:#1a1a1a;">
-<tr><td style="padding:28px 24px 8px 24px;">
-  <p style="margin:0; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:#888888;
-            font-family:Helvetica, Arial, sans-serif;">Chip Digest &middot; {{ run_date }}</p>
-  <p style="margin:14px 0 0 0; font-size:17px; line-height:1.55; color:#1a1a1a;">{{ digest.lede }}</p>
-</td></tr>
-{% for section in digest.sections %}
-<tr><td style="padding:22px 24px 0 24px;">
-  <h2 style="margin:0; padding-bottom:6px; font-size:14px; letter-spacing:1px; text-transform:uppercase;
-             color:#0b5394; border-bottom:2px solid #0b5394;
-             font-family:Helvetica, Arial, sans-serif;">{{ section.title }}</h2>
-</td></tr>
-{% for story in section.stories %}
-<tr><td style="padding:16px 24px 4px 24px;">
-  <h3 style="margin:0; font-size:17px; line-height:1.35;">
-    <a href="{{ story.url }}" style="color:#1a1a1a; text-decoration:none;">{{ story.headline }}</a>
-  </h3>
-  <p style="margin:6px 0 0 0; font-size:15px; line-height:1.55; color:#333333;">{{ story.summary }}</p>
-  <p style="margin:8px 0 0 0; font-size:14px; line-height:1.5; color:#555555; font-style:italic;">
-    Why it matters: {{ story.why_it_matters }}</p>
-  <p style="margin:8px 0 0 0; font-size:13px; font-family:Helvetica, Arial, sans-serif;">
-    <a href="{{ story.url }}" style="color:#0b5394; text-decoration:underline;">Read at {{ story.source }}</a>
-    {% for rel in story.related_urls %}
-    &nbsp;&middot;&nbsp;<a href="{{ rel }}" style="color:#888888; text-decoration:underline;">related</a>
-    {% endfor %}
-  </p>
-</td></tr>
-{% endfor %}
-{% endfor %}
-<tr><td style="padding:28px 24px 24px 24px;">
-  <p style="margin:0; border-top:1px solid #dddddd; padding-top:14px; font-size:12px; line-height:1.6;
-            color:#999999; font-family:Helvetica, Arial, sans-serif;">
-    You are receiving Chip Digest, a daily semiconductor news summary sent to a small private list.
-    To unsubscribe, reply to this email with the word "unsubscribe" and you will be removed.
-  </p>
-</td></tr>
+<body style="margin:0; padding:0; background-color:#E9EDEF;">
+
+<div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#E9EDEF;">
+  {{ digest.lede | truncate(150, true, '...') }}
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#E9EDEF;">
+  <tr>
+    <td align="center" style="padding:28px 12px 40px 12px;">
+
+      <table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background-color:#FFFFFF;">
+
+        <!-- ============ MASTHEAD ============ -->
+        <tr>
+          <td class="pad" style="background-color:#0B1F2A; padding:28px 32px 24px 32px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="left" style="font-family:Georgia,'Times New Roman',serif; font-size:26px; line-height:30px; font-weight:bold; letter-spacing:4px; color:#FFFFFF; text-transform:uppercase;" class="mast">
+                  Chip&nbsp;Digest
+                </td>
+                <td align="right" class="stack" style="font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:11px; line-height:16px; letter-spacing:1px; color:#C08A2E; white-space:nowrap;">
+                  {{ run_date | replace('-', '\u2022') }}
+                </td>
+              </tr>
+            </table>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="padding-top:14px; font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; line-height:14px; letter-spacing:2px; color:#7C93A1; text-transform:uppercase;">
+                  Daily semiconductor brief
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="height:3px; line-height:3px; font-size:0; background-color:#C08A2E;">&nbsp;</td>
+        </tr>
+
+        <!-- ============ SECTION INDEX ============ -->
+        <tr>
+          <td class="pad" style="background-color:#F2F5F6; padding:13px 32px 13px 32px; border-bottom:1px solid #DCE3E7; font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; line-height:17px; letter-spacing:1.4px; color:#4A5A66; text-transform:uppercase;">
+            {% for section in digest.sections %}
+            {{ section.title }}{% if not loop.last %} &nbsp;&#183;&nbsp; {% endif %}
+            {% endfor %}
+          </td>
+        </tr>
+
+        <!-- ============ LEAD ============ -->
+        <tr>
+          <td class="pad" style="padding:30px 32px 26px 32px;">
+            <div style="font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; line-height:14px; letter-spacing:2px; color:#C08A2E; text-transform:uppercase; padding-bottom:12px;">
+              Today in brief
+            </div>
+            <div class="lead" style="font-family:Georgia,'Times New Roman',serif; font-size:17px; line-height:28px; color:#0B1F2A;">
+              {{ digest.lede }}
+            </div>
+          </td>
+        </tr>
+
+        {% for section in digest.sections %}
+        {% set is_research = 'research' in section.title | lower %}
+        <!-- ============ SECTION: {{ section.title }} ============ -->
+        <tr>
+          <td class="pad" style="padding:{% if not loop.first %}14px{% else %}0{% endif %} 32px 0 32px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:11px; line-height:16px; letter-spacing:1.6px; color:#0B1F2A; text-transform:uppercase; font-weight:bold; white-space:nowrap; padding-right:12px;">
+                  {{ section.title }}
+                </td>
+                <td width="100%" style="height:1px; line-height:1px; font-size:0; background-color:#DCE3E7;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        {% for story in section.stories %}
+        <tr>
+          <td class="pad" style="padding:24px 32px {% if loop.last and loop.revindex0 == 0 %}30px{% else %}26px{% endif %} 32px;">
+            {% if is_research %}
+            <div style="font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; line-height:14px; letter-spacing:1.6px; color:#C08A2E; text-transform:uppercase; padding-bottom:8px;">
+              Research
+            </div>
+            {% endif %}
+            <div class="hd" style="font-family:Georgia,'Times New Roman',serif; font-size:21px; line-height:29px; font-weight:bold; color:#0B1F2A; padding-bottom:10px;">
+              {{ story.headline }}
+            </div>
+            <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:23px; color:#4A5A66; padding-bottom:16px;">
+              {{ story.summary }}
+            </div>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F2F5F6; border-left:3px solid {% if is_research %}#C08A2E{% else %}#0B1F2A{% endif %};">
+              <tr>
+                <td style="padding:14px 18px 15px 16px;">
+                  <div style="font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; line-height:14px; letter-spacing:1.4px; color:#0B1F2A; text-transform:uppercase; font-weight:bold; padding-bottom:6px;">
+                    Why it matters
+                  </div>
+                  <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; line-height:21px; color:#4A5A66;">
+                    {{ story.why_it_matters }}
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div style="padding-top:15px; font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:11px; line-height:16px; letter-spacing:1px; text-transform:uppercase;">
+              <a href="{{ story.url }}" style="color:#0B1F2A; text-decoration:none; border-bottom:1px solid #C08A2E; padding-bottom:2px;">{{ story.source }} &#8250;</a>
+              {% for rel in story.related_urls %}
+              &nbsp;&nbsp;<a href="{{ rel }}" style="color:#7C93A1; text-decoration:none; border-bottom:1px solid #DCE3E7; padding-bottom:2px; font-size:10px;">related &#8250;</a>
+              {% endfor %}
+            </div>
+          </td>
+        </tr>
+        {% if not loop.last %}
+        <tr><td class="pad" style="padding:0 32px;"><div style="height:1px; line-height:1px; font-size:0; background-color:#ECEFF1;">&nbsp;</div></td></tr>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+        <!-- ============ FOOTER ============ -->
+        <tr>
+          <td style="height:3px; line-height:3px; font-size:0; background-color:#C08A2E;">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="pad" style="background-color:#0B1F2A; padding:26px 32px 28px 32px;">
+            <div style="font-family:Georgia,'Times New Roman',serif; font-size:14px; line-height:18px; font-weight:bold; letter-spacing:3px; color:#FFFFFF; text-transform:uppercase; padding-bottom:12px;">
+              Chip Digest
+            </div>
+            <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:20px; color:#8FA3AF; padding-bottom:14px;">
+              A daily semiconductor and AI hardware summary, sent to a small private list. Seven stories, no filler.
+            </div>
+            <div style="font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; line-height:16px; letter-spacing:1px; color:#5E7684; text-transform:uppercase;">
+              Reply with &ldquo;unsubscribe&rdquo; to be removed from the list.
+            </div>
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
 </table>
-</td></tr>
-</table>
+
 </body>
 </html>

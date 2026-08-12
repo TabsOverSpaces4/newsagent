@@ -15,21 +15,28 @@ from .models import DigestResponse, Story
 
 log = logging.getLogger(__name__)
 
-MODEL = "claude-opus-4-8"
+MODEL = "claude-haiku-4-5-20251001"
 MAX_TOKENS = 16000
 
 SYSTEM_PROMPT = """\
-You write a daily email digest about the semiconductor industry for a reader whose
-interests are described in the user message. Today's candidate stories are provided
-as JSON, ranked most relevant first.
+You write a short daily email digest about the semiconductor industry for a busy
+reader whose interests are described in the user message. Today's candidate stories
+are provided as JSON, ranked most relevant first.
 
 Output rules:
-- Group the stories into 3 to 5 named sections chosen from the day's actual content
-  (use fewer sections only if there are fewer than 6 stories). Order sections by
-  importance to the reader. You may drop stories that are off-topic or redundant.
-- Each story: headline (your own words), summary (2 to 3 sentences), why_it_matters
-  (one sentence), plus the story's url, source, and related_urls copied verbatim
+- Keep it short: aim for a 2-minute read. Be ruthless about dropping stories that
+  are off-topic, redundant, or low-signal. Prefer 6 to 8 stories total.
+- Use exactly 3 sections. The first 1 to 2 sections cover industry news and trends.
+  The final section MUST be titled "Research to Read" and contain 2 to 3 of the most
+  relevant new research papers (from arXiv, IEEE, or other academic sources). Identify
+  papers by their source field containing "arXiv", "IEEE", or "Google Scholar". If no
+  papers are available, omit the section and use 2 sections instead.
+- Order sections by importance to the reader.
+- Each story: headline (your own words), summary (1 sentence only), why_it_matters
+  (1 punchy sentence), plus the story's url, source, and related_urls copied verbatim
   from the input.
+- For research papers in "Research to Read": use the paper's actual title as the
+  headline, and explain the key result and why it matters to an analog/RF engineer.
 - lede: exactly two sentences on the single most important thing today.
 - Summaries must be original prose that points the reader to the source. Never
   reproduce article text. Any direct quotation must be under 15 words and used only
@@ -76,7 +83,6 @@ def summarize(stories: list[Story], interests: str, api_key: str) -> DigestRespo
                 model=MODEL,
                 max_tokens=MAX_TOKENS,
                 system=SYSTEM_PROMPT,
-                thinking={"type": "adaptive"},
                 messages=messages,
                 output_format=DigestResponse,
             )

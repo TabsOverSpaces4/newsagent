@@ -96,4 +96,4 @@ def render(
 
 
 def subject_line(run_date: str) -> str:
-    return f"Chip Digest {run_date}"
+    return f"RFA Chip Digest {run_date}"

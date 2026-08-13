@@ -1,10 +1,10 @@
-name: Daily digest
+name: Biweekly digest
 
 on:
   schedule:
-    # 15:07 UTC = 8:07am PDT (7:07am PST in winter). Minute offset off the
-    # hour reduces GitHub cron queue delay.
-    - cron: "7 15 * * *"
+    # 16:07 UTC = 9:07am PDT (8:07am PST in winter). Mon & Thu only.
+    # Minute offset off the hour reduces GitHub cron queue delay.
+    - cron: "7 16 * * 1,4"
   workflow_dispatch:
     inputs:
       force:
@@ -20,7 +20,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: daily-digest
+  group: biweekly-digest
   cancel-in-progress: false
 
 jobs:

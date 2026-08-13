@@ -51,6 +51,9 @@ jobs:
           RECIPIENTS: ${{ secrets.RECIPIENTS }}
           FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
           REPLY_TO: ${{ secrets.REPLY_TO }}
+          FEEDBACK_WORKER_URL: ${{ secrets.FEEDBACK_WORKER_URL }}
+          FEEDBACK_HMAC_SECRET: ${{ secrets.FEEDBACK_HMAC_SECRET }}
+          FEEDBACK_EXPORT_SECRET: ${{ secrets.FEEDBACK_EXPORT_SECRET }}
         run: >
           python -m digest
           ${{ inputs.dry_run == true && '--dry-run' || '' }}

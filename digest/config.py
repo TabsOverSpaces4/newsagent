@@ -32,6 +32,9 @@ class Settings(BaseModel):
     max_feed_failure_ratio: float = 0.4
     min_stories: int = 5
     db_path: Path = Field(default=ROOT / "state" / "digest.db")
+    feedback_worker_url: str = ""
+    feedback_hmac_secret: str = ""
+    feedback_export_secret: str = ""
 
 
 def load_dotenv(path: Path = ROOT / ".env") -> None:
@@ -61,6 +64,9 @@ def load_settings(config_dir: Path = ROOT / "config") -> Settings:
         reply_to=os.environ.get("REPLY_TO", ""),
         anthropic_api_key=os.environ.get("ANTHROPIC_API_KEY", ""),
         resend_api_key=os.environ.get("RESEND_API_KEY", ""),
+        feedback_worker_url=os.environ.get("FEEDBACK_WORKER_URL", ""),
+        feedback_hmac_secret=os.environ.get("FEEDBACK_HMAC_SECRET", ""),
+        feedback_export_secret=os.environ.get("FEEDBACK_EXPORT_SECRET", ""),
     )
 
 

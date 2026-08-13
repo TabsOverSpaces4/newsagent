@@ -19,7 +19,7 @@ import logging
 import sys
 from datetime import UTC, datetime
 
-from . import dedupe, enrich, ingest, rank, render, send, state, summarize
+from . import dedupe, enrich, feedback, ingest, rank, render, send, state, summarize
 from .config import ROOT, load_settings
 from .ingest import USER_AGENT, TooManyFeedFailures
 
@@ -109,12 +109,24 @@ def main(argv: list[str] | None = None) -> int:
     )
     log.info("stage=cluster stories=%d merged=%d", len(stories), len(fresh) - len(stories))
 
+    # 2b. Feedback (optional, never fatal)
+    boosts: dict[int, float] = {}
+    if settings.feedback_worker_url:
+        fb = feedback.fetch_feedback(settings.feedback_worker_url, settings.feedback_export_secret)
+        if fb:
+            boosts = feedback.compute_boosts(fb, stories)
+            log.info("stage=feedback sources_boosted=%d", len(boosts))
+        else:
+            log.info("stage=feedback no data (new or unreachable)")
+
     # 3. Rank
     kept: list = []
     if stories:
         interest_vec = embed([settings.interests])[0]
         story_vecs = embed([rank.ranking_text(s) for s in stories])
-        kept, dropped = rank.rank(stories, story_vecs, interest_vec, top_n=settings.top_n)
+        kept, dropped = rank.rank(
+            stories, story_vecs, interest_vec, top_n=settings.top_n, boosts=boosts,
+        )
         log.info("stage=rank kept=%d dropped=%d", len(kept), len(dropped))
 
     if len(kept) < settings.min_stories:
@@ -155,7 +167,12 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     # 6. Render
-    html, text = render.render(digest_response, run_date)
+    html, text = render.render(
+        digest_response,
+        run_date,
+        worker_url=settings.feedback_worker_url,
+        hmac_secret=settings.feedback_hmac_secret,
+    )
     subject = render.subject_line(run_date)
     log.info("stage=render html_bytes=%d text_bytes=%d", len(html), len(text))
 

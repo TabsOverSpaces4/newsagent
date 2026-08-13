@@ -12,5 +12,8 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 
+# Wrangler local state
+feedback-worker/.wrangler/
+
 # OS
 .DS_Store

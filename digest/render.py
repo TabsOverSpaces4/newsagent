@@ -6,6 +6,8 @@ the LLM response is scrubbed before it reaches a template.
 
 from __future__ import annotations
 
+import hashlib
+import hmac as hmac_mod
 import re
 from pathlib import Path
 
@@ -53,11 +55,43 @@ def clean_digest(digest: DigestResponse) -> DigestResponse:
     return digest
 
 
-def render(digest: DigestResponse, run_date: str) -> tuple[str, str]:
+def generate_story_id(url: str, run_date: str) -> str:
+    """SHA-256 of url + run_date, truncated to 12 hex chars."""
+    return hashlib.sha256(f"{url}{run_date}".encode()).hexdigest()[:12]
+
+
+def generate_hmac(story_id: str, score: int, secret: str) -> str:
+    """HMAC-SHA256 over story_id + score, returned as hex."""
+    return hmac_mod.new(
+        secret.encode(), f"{story_id}{score}".encode(), hashlib.sha256,
+    ).hexdigest()
+
+
+def render(
+    digest: DigestResponse,
+    run_date: str,
+    worker_url: str = "",
+    hmac_secret: str = "",
+) -> tuple[str, str]:
     """Returns (html, plaintext) for the email."""
     digest = clean_digest(digest)
-    html = _env.get_template("digest.html.j2").render(digest=digest, run_date=run_date)
-    text = _env.get_template("digest.txt.j2").render(digest=digest, run_date=run_date)
+    ctx: dict = {"digest": digest, "run_date": run_date, "worker_url": worker_url}
+
+    if worker_url and hmac_secret:
+        scores = [0, 4, 7, 10]
+        story_feedback: dict[str, dict] = {}
+        for section in digest.sections:
+            for story in section.stories:
+                sid = generate_story_id(story.url, run_date)
+                story_feedback[story.url] = {
+                    "sid": sid,
+                    "hmacs": {s: generate_hmac(sid, s, hmac_secret) for s in scores},
+                }
+        ctx["story_feedback"] = story_feedback
+        ctx["rating_scores"] = scores
+
+    html = _env.get_template("digest.html.j2").render(**ctx)
+    text = _env.get_template("digest.txt.j2").render(**ctx)
     return html, text
 
 

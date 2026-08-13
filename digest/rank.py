@@ -28,9 +28,17 @@ def rank(
     story_vectors: np.ndarray,
     interest_vector: np.ndarray,
     top_n: int = 50,
+    boosts: dict[int, float] | None = None,
 ) -> tuple[list[Story], list[Story]]:
-    """Returns (kept, dropped), kept sorted by score descending."""
-    for story, vec in zip(stories, story_vectors, strict=True):
-        story.score = float(np.dot(vec, interest_vector)) * story.entry.weight
+    """Returns (kept, dropped), kept sorted by score descending.
+
+    If boosts is provided, each story's score is multiplied by the
+    corresponding boost value (default 1.0) after cosine similarity.
+    """
+    for i, (story, vec) in enumerate(zip(stories, story_vectors, strict=True)):
+        score = float(np.dot(vec, interest_vector)) * story.entry.weight
+        if boosts:
+            score *= boosts.get(i, 1.0)
+        story.score = score
     ordered = sorted(stories, key=lambda s: s.score, reverse=True)
     return ordered[:top_n], ordered[top_n:]

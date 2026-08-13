@@ -1,0 +1,12 @@
+{
+	"name": "chip-digest-feedback",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-09-01",
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "chip-digest-feedback",
+			"database_id": "0217e975-1472-4422-860d-0364038f2420"
+		}
+	]
+}

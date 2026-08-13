@@ -132,6 +132,19 @@
               &nbsp;&nbsp;<a href="{{ rel }}" style="color:#7C93A1; text-decoration:none; border-bottom:1px solid #DCE3E7; padding-bottom:2px; font-size:10px;">related &#8250;</a>
               {% endfor %}
             </div>
+            {% if worker_url and story_feedback is defined and story.url in story_feedback %}
+            {% set fb = story_feedback[story.url] %}
+            <div style="padding-top:12px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+                {% for s, label in [(0, 'Skip'), (4, 'Meh'), (7, 'Good'), (10, 'Great')] %}
+                <td style="padding-right:6px;">
+                  <a href="{{ worker_url }}/rate?sid={{ fb.sid }}&amp;s={{ s }}&amp;t={{ fb.hmacs[s] }}&amp;url={{ story.url | urlencode }}&amp;source={{ story.source | urlencode }}&amp;title={{ story.headline | urlencode }}&amp;rd={{ run_date }}"
+                     style="display:inline-block; padding:4px 10px; font-family:Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; text-decoration:none; color:#4A5A66; border:1px solid #DCE3E7; border-radius:3px;">{{ label }}</a>
+                </td>
+                {% endfor %}
+              </tr></table>
+            </div>
+            {% endif %}
           </td>
         </tr>
         {% if not loop.last %}

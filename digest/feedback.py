@@ -22,17 +22,32 @@ def fetch_feedback(worker_url: str, export_secret: str) -> dict:
     """Call the /export endpoint and return parsed JSON.
 
     Returns an empty dict on any failure so the pipeline is never blocked.
+    A 403 is logged as ERROR because it always means a secret mismatch.
     """
     url = f"{worker_url.rstrip('/')}/export?secret={export_secret}"
     try:
         req = Request(url, headers={"Accept": "application/json"})
         with urlopen(req, timeout=EXPORT_TIMEOUT) as resp:
+            if resp.status == 403:
+                log.error(
+                    "feedback export returned 403: FEEDBACK_EXPORT_SECRET does not "
+                    "match the Worker's EXPORT_SECRET. The feedback loop is broken "
+                    "until you fix this."
+                )
+                return {}
             if resp.status != 200:
                 log.warning("feedback export returned status=%d", resp.status)
                 return {}
             return json.loads(resp.read())
     except (URLError, OSError, json.JSONDecodeError, ValueError) as exc:
-        log.warning("feedback fetch failed: %s", exc)
+        if "403" in str(exc):
+            log.error(
+                "feedback export returned 403: FEEDBACK_EXPORT_SECRET does not "
+                "match the Worker's EXPORT_SECRET. The feedback loop is broken "
+                "until you fix this."
+            )
+        else:
+            log.warning("feedback fetch failed: %s", exc)
         return {}
 
 

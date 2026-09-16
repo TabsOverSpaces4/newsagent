@@ -142,9 +142,12 @@ def main(argv: list[str] | None = None) -> int:
         kept = kept[: args.limit]
         log.info("stage=limit kept=%d", len(kept))
 
-    # 4. Enrich
-    enriched = asyncio.run(enrich.enrich(kept, USER_AGENT, max_words=settings.max_article_words))
-    log.info("stage=enrich ok=%d skipped=%d", enriched, len(kept) - enriched)
+    # 4. Enrich (only the top stories; the rest keep their feed summary)
+    enrich_n = min(len(kept), 25)
+    enriched = asyncio.run(
+        enrich.enrich(kept[:enrich_n], USER_AGENT, max_words=settings.max_article_words)
+    )
+    log.info("stage=enrich ok=%d skipped=%d enriched_of=%d", enriched, enrich_n - enriched, enrich_n)
 
     # 5. Summarize
     if args.no_llm:
